@@ -1,0 +1,83 @@
+<div class="container-fluid m-2">
+  <div class="row">
+    <div class=" col-md-6 col-xl-6 col-sm-6 col-lg-6 card p-2 px-3">
+      <form [formGroup]="userForm">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">
+               <i class="fa fa-user ml-1" aria-hidden="true"></i> Name</label>
+              <input type="text"  class="form-control" formControlName="name"  placeholder="Enter Name">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="">
+                 <i class="fa fa-file-code-o mx-1" aria-hidden="true"></i>Profile</label>
+              <input type="text"  class="form-control" formControlName="profile" placeholder="Enter Profile">
+            </div>
+          </div>
+        </div>
+
+     <div class="row">
+       <div class="col-sm-6">
+        <div class="form-group">
+          <label for=""> <i class="fa fa-calendar ml-1" aria-hidden="true"></i> Total Experience</label>
+          <input type="number"  class="form-control" formControlName="totalexp" placeholder="Enter Experience">
+        </div>
+       </div>
+       <div class="col-sm-6">
+        <div class="form-group">
+          <label for=""> <i class="fa fa-sitemap" aria-hidden="true"></i>
+            Current Organization</label>
+          <input type="text"  formControlName="organization" class="form-control" placeholder="Enter Organization ">
+        </div>
+       </div>
+     </div>
+     <div formArrayName="skills">
+      <label class="font-weight-bold text-muted">Skills</label>
+      <button class="pull-right btn btn-success btn-sm" (click)="addSkill()">
+        <i class="fa fa-plus" aria-hidden="true" ></i> Add Skills
+      </button>
+      <div class="row" *ngFor="let item of userForm.controls.skills['controls'];let i = index" [formGroupName]=i>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="">Skills Name</label>
+            <input type="text" formControlName="skillname"  class="form-control" placeholder="Skills Name" >
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="">Skills Level</label>
+            <select class="form-control" formControlName="level" id="exampleFormControlSelect1">
+              <option value="" disabled selected>Select your Level</option>
+              <option>Basic</option>
+              <option>Mid Level</option>
+              <option>Advanced Level</option>
+
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <label for="">Overall Exp</label>
+            <input type="number" formControlName="overexp" class="form-control" placeholder="Overall Experience" >
+          </div>
+        </div>
+        <div class="col-sm-2 text-center m-auto pt-3">
+            <button class="btn btn-outline-danger" (click)="deleteSkills(i)">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+        </div>
+      </div>
+     </div>
+
+        <button class="btn btn-md btn-primary pull-right mt-2"[disabled]="userForm.invalid" (click)="submitUser(userForm.value)" >Submit</button>
+      </form>
+    </div>
+    <div class="col-md-6 col-xl-6 col-sm-6 col-lg-6">
+      <app-user [UserInfo]="submituserList"></app-user>
+    </div>
+  </div>
+</div>
